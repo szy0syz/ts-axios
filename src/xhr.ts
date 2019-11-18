@@ -9,7 +9,7 @@ export default function xhr(config: AxiosRequestConfig): void {
 
   Object.keys(headers).forEach(name => {
     //* 当data为空值时，删除无用的header
-    if (data === null && name.toLocaleLowerCase() === 'content-type') {
+    if (data === null && name.toLowerCase() === 'content-type') {
       delete headers[name]
     } else {
       request.setRequestHeader(name, headers[name])
