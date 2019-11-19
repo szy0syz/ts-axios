@@ -1,12 +1,14 @@
-import { AxiosRequestConfig, AxiosPromise } from './types'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
 import xhr from './xhr'
 import { buildURL } from './utils/url'
-import { transformRequest } from './utils/data'
+import { transformRequest, transformResponse } from './utils/data'
 import { processHeaders } from './utils/headers'
 
 function axios(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
-  return xhr(config)
+  return xhr(config).then(res => {
+    return transfromResponseData(res)
+  })
 }
 
 function processConfig(config: AxiosRequestConfig): void {
@@ -29,6 +31,11 @@ function transformHeaders(config: AxiosRequestConfig): any {
   //* 这里headers默认为空对象，则post时默认Content-Type: application/json
   const { headers = {}, data } = config
   return processHeaders(headers, data)
+}
+
+function transfromResponseData(res: AxiosResponse): AxiosResponse {
+  res.data = transformResponse(res.data)
+  return res
 }
 
 export default axios
