@@ -1,25 +1,16 @@
 import axios from '../../src/index'
 
 axios({
-  method: 'post',
   url: '/extend/post',
+  method: 'post',
   data: {
     msg: 'hi'
   }
 })
 
-axios({
-  method: 'post',
+axios.request({
   url: '/extend/post',
-  data: {
-    msg: 'hello'
-  }
-})
-
-
-axios({
   method: 'post',
-  url: '/extend/post',
   data: {
     msg: 'hello'
   }
@@ -27,6 +18,14 @@ axios({
 
 axios.get('/extend/get')
 
-axios.get('/extend/options')
+axios.options('/extend/options')
 
-axios.get('/extend/delete')
+axios.delete('/extend/delete')
+
+axios.head('/extend/head')
+
+axios.post('/extend/post', { msg: 'post' })
+
+axios.put('/extend/put', { msg: 'put' })
+
+axios.patch('/extend/patch', { msg: 'patch' })
