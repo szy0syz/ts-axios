@@ -243,3 +243,7 @@ export default axios
     return dispatchRequest(config)
   }
 ```
+
+## 8 拦截器
+
+![interceptor](./docs/assets/tx-axios-interceptor.png)
