@@ -35,6 +35,7 @@ axios({
   timeout: 2000
 }).then((res) => {
   console.log(res)
+
 }).catch((e: AxiosError) => {
   console.log(e.message)
   console.log(e.config)
