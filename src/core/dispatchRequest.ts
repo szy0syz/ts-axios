@@ -36,8 +36,6 @@ function transformURL(config: AxiosRequestConfig): string {
 // }
 
 function transfromResponseData(res: AxiosResponse): AxiosResponse {
-  console.log('~~~~~~~~~~~invoke: [transfromResponseData]')
-  debugger
   res.data = transform(res.data, res.headers, res.config.transformResponse)
   return res
 }
