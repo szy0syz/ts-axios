@@ -1,4 +1,4 @@
-import { CancelExecutor, cancelTokenSource, Canceler, CancelToken } from './../types'
+import { CancelExecutor, cancelTokenSource, Canceler } from './../types'
 
 interface ResolvePromise {
   (reason?: string): void
