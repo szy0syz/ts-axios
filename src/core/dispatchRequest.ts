@@ -7,7 +7,7 @@ import { config } from 'shelljs'
 
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   //* 发送请求前，检查是否有cancelToken，如果之前使用token取消过有就抛异常，不发送请求
-  thtowIfCalcellationRequested(config)
+  throwIfCancellationRequested(config)
   processConfig(config)
   return xhr(config).then(res => {
     return transfromResponseData(res)
@@ -43,8 +43,8 @@ function transfromResponseData(res: AxiosResponse): AxiosResponse {
   return res
 }
 
-function thtowIfCalcellationRequested(config: AxiosRequestConfig): void {
+function throwIfCancellationRequested(config: AxiosRequestConfig): void {
   if (config.cancelToken) {
-    config.cancelToken.thtowIfRequested()
+    config.cancelToken.throwIfRequested()
   }
 }
