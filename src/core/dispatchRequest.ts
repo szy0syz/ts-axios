@@ -3,8 +3,11 @@ import xhr from './xhr'
 import { buildURL } from '../utils/url'
 import { flattenHeaders } from '../utils/headers'
 import transform from './transform'
+import { config } from 'shelljs'
 
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
+  //* 发送请求前，检查是否有cancelToken，如果之前使用token取消过有就抛异常，不发送请求
+  thtowIfCalcellationRequested(config)
   processConfig(config)
   return xhr(config).then(res => {
     return transfromResponseData(res)
@@ -38,4 +41,10 @@ function transformURL(config: AxiosRequestConfig): string {
 function transfromResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transform(res.data, res.headers, res.config.transformResponse)
   return res
+}
+
+function thtowIfCalcellationRequested(config: AxiosRequestConfig): void {
+  if (config.cancelToken) {
+    config.cancelToken.thtowIfRequested()
+  }
 }
